@@ -1,5 +1,7 @@
 package exercises
 
+import "fmt"
+
 type Unicorn struct {
 	Name  string
 	Color string
@@ -17,4 +19,12 @@ func NewUnicorn(name string, color string) Unicorn {
 		unicorn.Color = "white"
 	}
 	return unicorn
+}
+
+func (u Unicorn) IsWhite() bool {
+	return u.Color == "white"
+}
+
+func (u Unicorn) Says(input string) string {
+	return fmt.Sprintf("**;* %s *;**", input)
 }
