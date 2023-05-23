@@ -24,3 +24,29 @@ func TestNewMedusa(t *testing.T) {
 	assert.Equal(t, "Bree", medusa.Name)
 	assert.Equal(t, []string{}, medusa.Statues)
 }
+
+func TestPersonIsObject(t *testing.T) {
+	person := exercises.Person{}
+
+	assert.Equal(t, person, exercises.Person{})
+}
+
+func TestNewPerson(t *testing.T) {
+	person := exercises.NewPerson("Jhun")
+
+	assert.Equal(t, "Jhun", person.Name)
+	assert.False(t, person.Stoned, "Person is not stoned")
+}
+
+func TestMedusaStare(t *testing.T) {
+	medusa := exercises.NewMedusa("Brenna")
+	person := exercises.NewPerson("Jhun")
+
+	assert.Equal(t, []string{}, medusa.Statues)
+	assert.False(t, person.Stoned, "Person is not stoned")
+
+	medusa.Stare(&person)
+
+	assert.True(t, person.Stoned, "Jhun is stoned")
+	assert.Equal(t, 1, len(medusa.Statues))
+}
