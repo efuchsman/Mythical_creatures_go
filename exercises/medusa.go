@@ -2,13 +2,13 @@ package exercises
 
 type Medusa struct {
 	Name    string
-	Statues []string
+	Statues []Person
 }
 
 func NewMedusa(name string) Medusa {
 	medusa := Medusa{
 		Name:    name,
-		Statues: []string{},
+		Statues: []Person{},
 	}
 	return medusa
 }
@@ -28,6 +28,12 @@ func NewPerson(name string) Person {
 }
 
 func (m *Medusa) Stare(p *Person) {
-	m.Statues = append(m.Statues, p.Name)
+	m.Statues = append(m.Statues, *p)
 	p.Stoned = true
+
+	if len(m.Statues) > 3 {
+		removedPerson := &m.Statues[0]
+		m.Statues = m.Statues[1:]
+		removedPerson.Stoned = false
+	}
 }
